@@ -1,8 +1,9 @@
 local mainMenu = require("bug-farmer.menu.menu")
 
 function love.load()
+  world = love.physics.newWorld(0, 0, 0)
   mainMenu.initCanvas(800,600)
-  mainMenu.drawMenu()
+  mainMenu.drawMenu(world)
   print(mainMenu)
 end
 
