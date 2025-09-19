@@ -71,16 +71,16 @@ function mainMenu.drawMenu(world)
   love.graphics.setCanvas()
 end
 
-function mainMenu.updateMenuState(dt) 
+function mainMenu.updateMenuState(dt, gameState) 
   -- if mouse is up, allow mouseDown
   mainMenu.state.mouseDown = love.mouse.isDown(1)
   if mainMenu.state.mouseDown and mainMenu.state.mouseUp then
-    handleUpdate()
+    handleUpdate(gameState)
   end
   mainMenu.state.mouseUp = not love.mouse.isDown(1)
 end
 
-function handleUpdate()
+function handleUpdate(gameState)
   local cursorX, cursorY = love.mouse.getPosition()
 
   -- check each box
@@ -90,7 +90,7 @@ function handleUpdate()
 
   if mainMenu.objects.playButton.fixture:testPoint(cursorX, cursorY) then
     -- how do i manage screen switch? global variable from here?
-    mainMenu.state.pressPlay = true
+    gameState.currentScreen = "game"
     return
   end
 
@@ -98,6 +98,10 @@ function handleUpdate()
     mainMenu.state.pressSettings = true
     return
   end
+end
+
+function mainMenu.drawCanvas()
+  love.graphics.draw(mainMenu.canvas)
 end
 
 return mainMenu
