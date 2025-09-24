@@ -25,9 +25,14 @@ end
 function mainMenu.drawMenu(world)
   love.graphics.setCanvas(mainMenu.canvas)
   local title = love.graphics.newImage("menu/assets/title.png")
+  local imgWidth = title:getWidth()
+  local imgHeight = title:getHeight()
+  -- Compute centered coordinates
+  local x = (mainMenu.dimX - imgWidth) / 2
+  local y = mainMenu.dimY * 0.0675
   local r, g, b = love.math.colorFromBytes(43, 220, 255)
   love.graphics.setBackgroundColor(r, g, b)
-  love.graphics.draw(title, mainMenu.dimX * .1875, mainMenu.dimY * .0625)
+  love.graphics.draw(title, x, y)
   
   mainMenu.objects.playButton = {}
   local playButton = mainMenu.objects.playButton
